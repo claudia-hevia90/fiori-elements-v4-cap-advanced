@@ -12,7 +12,10 @@
     "lint": "npx eslint .",
     "start": "cds run",
     "test": "jest",
-    "test:mocha": "npx mocha --timeout 20000"
+    "test:mocha": "npx mocha --timeout 20000",
+    "undeploy": "cf undeploy capire.sflight --delete-services --delete-service-keys --delete-service-brokers",
+    "build": "rimraf resources mta_archives && mbt build --mtar archive",
+    "deploy": "cf deploy mta_archives/archive.mtar --retries 1"
   },
   "dependencies": {
     "@sap/cds": "^7",
@@ -29,7 +32,8 @@
     "chai-subset": "^1.6.0",
     "jest": "^28.1.0",
     "qunit": "^2.9.3",
-    "sqlite3": "^5"
+    "sqlite3": "^5",
+    "rimraf": "^5.0.5"
   },
   "cds": {
     "requires": {
@@ -109,6 +113,7 @@
     "testTimeout": 20000
   },
   "sapux": [
-    "app/travel_processor"
+    "app/travel_processor",
+    "app/customer"
   ]
 }
