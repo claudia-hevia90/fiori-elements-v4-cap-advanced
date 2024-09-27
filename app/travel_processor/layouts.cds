@@ -426,9 +426,9 @@ annotate TravelService.Booking with @(
   },
   UI.DataPoint #TotalSupplPrice2: {
     Value                 : TotalSupplPrice,
-    MinimumValue          : 0,
-    MaximumValue          : 120,
-    TargetValue           : 100,
+    MinimumValue          : {$edmJson: {$Path: '/supplemnetScope/MinimunValue'}},
+    MaximumValue          : {$edmJson: {$Path: '/supplemnetScope/MaximumValue'}},
+    TargetValue           : {$edmJson: {$Path: '/supplemnetScope/TargetValue'}},
     Visualization         : #BulletChart,
     // criticality: totalSupplPriceCriticality,
     CriticalityCalculation: {
