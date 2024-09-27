@@ -1,5 +1,6 @@
 using TravelService from '../../srv/travel-service';
 using from '../../db/schema';
+using from '../../db/master-data';
 
 
 //
@@ -94,6 +95,11 @@ annotate TravelService.Travel with @(
         Target: '@UI.DataPoint#Progress',
         Label : '{i18n>ProgressOfTravel}',
       },
+      {
+        $Type : 'UI.DataFieldForAnnotation',
+        Target: 'to_Agency/@Communication.Contact#contact',
+        Label : '{i18n>ContactName}',
+      },
     ],
     Facets                : [
       {
@@ -121,6 +127,7 @@ annotate TravelService.Travel with @(
           }
         ]
       },
+
       { // booking list
         $Type : 'UI.ReferenceFacet',
         Target: 'to_Booking/@UI.PresentationVariant',
@@ -312,3 +319,81 @@ SortOrder: [{
   Property  : FlightDate,
   Descending: true
 }]}};
+
+annotate TravelService.TravelAgency with @(Communication.Contact #contact: {
+  $Type: 'Communication.ContactType',
+  fn   : Name,
+  tel  : [{
+    $Type: 'Communication.PhoneNumberType',
+    type : #work,
+    uri  : PhoneNumber,
+  }, ],
+  adr  : [{
+    $Type   : 'Communication.AddressType',
+    type    : #work,
+    street  : Street,
+    locality: City,
+    code    : PostalCode,
+    country : CountryCode_code,
+  }, ],
+});
+
+annotate TravelService.Travel with @UI: {
+  SelectionVariant #canceled: {
+    $Type           : 'UI.SelectionVariantType',
+    ID              : 'canceled',
+    Text            : 'canceled',
+    Parameters      : [
+
+    ],
+    FilterExpression: '',
+    SelectOptions   : [{
+      $Type       : 'UI.SelectOptionType',
+      PropertyName: TravelStatus_code,
+      Ranges      : [{
+        $Type : 'UI.SelectionRangeType',
+        Sign  : #I,
+        Option: #EQ,
+        Low   : 'X',
+      }, ],
+    }, ],
+  },
+  SelectionVariant #open    : {
+    $Type           : 'UI.SelectionVariantType',
+    ID              : 'open',
+    Text            : 'open',
+    Parameters      : [
+
+    ],
+    FilterExpression: '',
+    SelectOptions   : [{
+      $Type       : 'UI.SelectOptionType',
+      PropertyName: TravelStatus_code,
+      Ranges      : [{
+        $Type : 'UI.SelectionRangeType',
+        Sign  : #I,
+        Option: #EQ,
+        Low   : 'O',
+      }, ],
+    }, ],
+  },
+  SelectionVariant #accepted: {
+    $Type           : 'UI.SelectionVariantType',
+    ID              : 'accepted',
+    Text            : 'accepted',
+    Parameters      : [
+
+    ],
+    FilterExpression: '',
+    SelectOptions   : [{
+      $Type       : 'UI.SelectOptionType',
+      PropertyName: TravelStatus_code,
+      Ranges      : [{
+        $Type : 'UI.SelectionRangeType',
+        Sign  : #I,
+        Option: #EQ,
+        Low   : 'A',
+      }, ],
+    }, ],
+  }
+};
