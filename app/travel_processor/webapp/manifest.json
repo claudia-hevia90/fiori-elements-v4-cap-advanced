@@ -169,7 +169,23 @@
                                     }
                                 }
                             },
-                            "hideFilterBar": true
+                            "hideFilterBar": true,
+                            "views": {
+                                "paths": [
+                                    {
+                                        "key": "tableView",
+                                        "annotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant#tableView"
+                                    },
+                                    {
+                                        "key": "tableView1",
+                                        "annotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant#tableView1"
+                                    },
+                                    {
+                                        "key": "tableView2",
+                                        "annotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant#tableView2"
+                                    }
+                                ]
+                            }
                         }
                     },
                     "controlAggregation": "beginColumnPages",
