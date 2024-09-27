@@ -124,7 +124,14 @@ annotate TravelService.Travel with @(
             ID    : 'DateData',
             Target: '@UI.FieldGroup#DateData',
             Label : '{i18n>Dates}'
-          }
+          },
+            {
+                $Type : 'UI.ReferenceFacet',
+                Label : '{i18n>TravelAdministrativeData}',
+                ID : 'TraveladministrativeData',
+                Target : '@UI.FieldGroup#TraveladministrativeData',
+                ![@UI.PartOfPreview] : false,
+            },
         ]
       },
 
@@ -322,6 +329,23 @@ annotate TravelService.Travel with @(
     TargetValue  : 100,
     Visualization: #Progress,
   },
+    UI.FieldGroup #TraveladministrativeData : {
+        $Type : 'UI.FieldGroupType',
+        Data : [
+            {
+                $Type : 'UI.DataField',
+                Value : createdAt,
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : LastChangedAt,
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : createdBy,
+            },
+        ],
+    },
 );
 
 annotate TravelService.Booking with @(
@@ -581,3 +605,7 @@ annotate TravelService.Travel with {
   Description @UI.MultiLineText: true
               @UI.Placeholder  : '{i18n>DescrPlcehlder}'
 }
+annotate TravelService.Booking with {
+    ConnectionID @Common.ValueListWithFixedValues : true
+};
+
