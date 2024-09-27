@@ -144,7 +144,15 @@ annotate TravelService.Travel with @(
         Value      : TravelStatus_code,
         Criticality: TravelStatus.criticality,
         Label      : '{i18n>Status}' // label only necessary if differs from title of element
-      }
+      },
+      {
+        $Type: 'UI.DataField',
+        Value: BeginDate,
+      },
+      {
+        $Type: 'UI.DataField',
+        Value: EndDate,
+      },
     ]},
     FieldGroup #DateData  : {Data: [
       {
@@ -568,3 +576,8 @@ annotate TravelService.Travel with @UI: {
     }, ],
   }
 };
+
+annotate TravelService.Travel with {
+  Description @UI.MultiLineText: true
+              @UI.Placeholder  : '{i18n>DescrPlcehlder}'
+}
